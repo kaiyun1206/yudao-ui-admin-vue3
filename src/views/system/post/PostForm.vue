@@ -31,7 +31,8 @@
 <script setup lang="ts">
 import type { FormExpose } from '@/components/Form'
 import * as PostApi from '@/api/system/post'
-import { rules, allSchemas } from './post.data'
+import { allSchemas, rules } from './post.data'
+
 const { t } = useI18n() // 国际化
 const message = useMessage() // 消息弹窗
 
@@ -46,7 +47,7 @@ const actionLoading = ref(false) // 按钮 Loading
 const formRef = ref<FormExpose>() // 表单 Ref
 const detailData = ref() // 详情 Ref
 
-const openModal = async (type: string, rowId?: number) => {
+const openModal = async (type: string, rowId?: string) => {
   modelLoading.value = true
   modelTitle.value = t('action.' + type)
   actionType.value = type

@@ -1,7 +1,7 @@
 import request from '@/config/axios'
 
 export interface PostVO {
-  id?: number
+  id?: string
   name: string
   code: string
   sort: number
@@ -29,11 +29,11 @@ export const getPostPageApi = async (params: PostPageReqVO) => {
 
 // 获取岗位精简信息列表
 export const listSimplePostsApi = async () => {
-  return await request.get({ url: '/system/post/list-all-simple' })
+  return await request.get({ url: '/system/post/simple/list/all' })
 }
 
 // 查询岗位详情
-export const getPostApi = async (id: number) => {
+export const getPostApi = async (id: string) => {
   return await request.get({ url: '/system/post/get?id=' + id })
 }
 
@@ -48,7 +48,7 @@ export const updatePostApi = async (data: PostVO) => {
 }
 
 // 删除岗位
-export const deletePostApi = async (id: number) => {
+export const deletePostApi = async (id: string) => {
   return await request.delete({ url: '/system/post/delete?id=' + id })
 }
 

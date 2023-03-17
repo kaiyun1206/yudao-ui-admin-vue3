@@ -155,7 +155,7 @@ const handleTypeCreate = () => {
   dictTypeValue.value = ''
   setDialogTile('typeCreate')
 }
-const handleTypeUpdate = async (rowId: number) => {
+const handleTypeUpdate = async (rowId: string) => {
   setDialogTile('typeUpdate')
   // 设置数据
   const res = await DictTypeApi.getDictTypeApi(rowId)
@@ -167,7 +167,7 @@ const handleTypeUpdate = async (rowId: number) => {
 const handleDataCreate = () => {
   setDialogTile('dataCreate')
 }
-const handleDataUpdate = async (rowId: number) => {
+const handleDataUpdate = async (rowId: string) => {
   setDialogTile('dataUpdate')
   // 设置数据
   const res = await DictDataApi.getDictDataApi(rowId)

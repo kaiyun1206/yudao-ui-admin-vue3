@@ -65,11 +65,11 @@
   </XModal>
 </template>
 <script setup lang="ts" name="TenantPackage">
-import { handleTree, defaultProps } from '@/utils/tree'
+import { defaultProps, handleTree } from '@/utils/tree'
 import type { FormExpose } from '@/components/Form'
 import type { ElTree } from 'element-plus'
 // 业务相关的 import
-import { rules, allSchemas } from './tenantPackage.data'
+import { allSchemas, rules } from './tenantPackage.data'
 import * as TenantPackageApi from '@/api/system/tenantPackage'
 import { listSimpleMenusApi } from '@/api/system/menu'
 
@@ -119,7 +119,7 @@ const handleCreate = () => {
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   setDialogTile('update')
   // 设置数据
   const res = await TenantPackageApi.getTenantPackageApi(rowId)
@@ -139,8 +139,8 @@ const submitForm = async () => {
       try {
         const data = unref(formRef)?.formModel as TenantPackageApi.TenantPackageVO
         data.menuIds = [
-          ...(treeRef.value!.getCheckedKeys(false) as unknown as Array<number>),
-          ...(treeRef.value!.getHalfCheckedKeys() as unknown as Array<number>)
+          ...(treeRef.value!.getCheckedKeys(false) as unknown as Array<string>),
+          ...(treeRef.value!.getHalfCheckedKeys() as unknown as Array<string>)
         ]
         if (actionType.value === 'create') {
           await TenantPackageApi.createTenantPackageTypeApi(data)

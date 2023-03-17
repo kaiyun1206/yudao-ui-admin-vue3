@@ -1,21 +1,22 @@
 import request from '@/config/axios'
 
 export interface JobLogVO {
-  id: number
-  jobId: number
+  id: string
+  jobId: string
   handlerName: string
   handlerParam: string
   cronExpression: string
-  executeIndex: string
-  beginTime: string
-  endTime: string
-  duration: string
+  executeIndex: number
+  beginTime: Date
+  endTime: Date
+  duration: number
   status: number
-  createTime: string
+  jobResult: string
+  createTime: Date
 }
 
 export interface JobLogPageReqVO extends PageParam {
-  jobId?: number
+  jobId?: string
   handlerName?: string
   beginTime?: string
   endTime?: string
@@ -23,7 +24,7 @@ export interface JobLogPageReqVO extends PageParam {
 }
 
 export interface JobLogExportReqVO {
-  jobId?: number
+  jobId?: string
   handlerName?: string
   beginTime?: string
   endTime?: string
@@ -32,18 +33,18 @@ export interface JobLogExportReqVO {
 
 // 任务日志列表
 export const getJobLogPageApi = (params: JobLogPageReqVO) => {
-  return request.get({ url: '/infra/job-log/page', params })
+  return request.get({ url: '/infra/job/log/page', params })
 }
 
 // 任务日志详情
-export const getJobLogApi = (id: number) => {
-  return request.get({ url: '/infra/job-log/get?id=' + id })
+export const getJobLogApi = (id: string) => {
+  return request.get({ url: '/infra/job/log/get?id=' + id })
 }
 
 // 导出定时任务日志
 export const exportJobLogApi = (params: JobLogExportReqVO) => {
   return request.download({
-    url: '/infra/job-log/export-excel',
+    url: '/infra/job/log/export/excel',
     params
   })
 }

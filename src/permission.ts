@@ -15,8 +15,8 @@ const { loadStart, loadDone } = usePageLoading()
 // 路由不重定向白名单
 const whiteList = [
   '/login',
-  '/social-login',
-  '/auth-redirect',
+  '/social/login',
+  '/social/redirect',
   '/bind',
   '/register',
   '/oauthLogin/gitee'

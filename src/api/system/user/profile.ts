@@ -1,19 +1,19 @@
 import request from '@/config/axios'
 
 export interface ProfileDept {
-  id: number
+  id: string
   name: string
 }
 export interface ProfileRole {
-  id: number
+  id: string
   name: string
 }
 export interface ProfilePost {
-  id: number
+  id: string
   name: string
 }
 export interface SocialUser {
-  id: number
+  id: string
   type: number
   openid: string
   token: string
@@ -25,7 +25,7 @@ export interface SocialUser {
   state: string
 }
 export interface ProfileVO {
-  id: number
+  id: string
   username: string
   nickname: string
   dept: ProfileDept
@@ -63,7 +63,7 @@ export const updateUserProfileApi = (data: UserProfileUpdateReqVO) => {
 // 用户密码重置
 export const updateUserPwdApi = (oldPassword: string, newPassword: string) => {
   return request.put({
-    url: '/system/user/profile/update-password',
+    url: '/system/user/profile/update/password',
     data: {
       oldPassword: oldPassword,
       newPassword: newPassword
@@ -73,5 +73,5 @@ export const updateUserPwdApi = (oldPassword: string, newPassword: string) => {
 
 // 用户头像上传
 export const uploadAvatarApi = (data) => {
-  return request.upload({ url: '/system/user/profile/update-avatar', data: data })
+  return request.upload({ url: '/system/user/profile/update/avatar', data: data })
 }

@@ -1,8 +1,8 @@
 import { resolve } from 'path'
+import type { ConfigEnv, UserConfig } from 'vite'
 import { loadEnv } from 'vite'
-import type { UserConfig, ConfigEnv } from 'vite'
 import { createVitePlugins } from './build/vite'
-import { include, exclude } from "./build/vite/optimize"
+import { exclude, include } from "./build/vite/optimize"
 // 当前执行node命令时文件夹的地址(工作目录)
 const root = process.cwd()
 
@@ -33,11 +33,11 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       open: env.VITE_OPEN === 'true',
       // 本地跨域代理
       proxy: {
-        ['/admin-api']: {
+        ['/api/admin']: {
           target: env.VITE_BASE_URL,
           ws: false,
           changeOrigin: true,
-          rewrite: (path) => path.replace(new RegExp(`^/admin-api`), ''),
+          rewrite: (path) => path.replace(new RegExp(`^/api/admin`), ''),
         },
       },
     },

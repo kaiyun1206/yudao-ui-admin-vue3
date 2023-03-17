@@ -75,7 +75,7 @@
   </XModal>
 </template>
 <script setup lang="ts" name="Dept">
-import { handleTree, defaultProps } from '@/utils/tree'
+import { defaultProps, handleTree } from '@/utils/tree'
 import type { FormExpose } from '@/components/Form'
 import { allSchemas, rules } from './dept.data'
 import * as DeptApi from '@/api/system/dept'
@@ -134,7 +134,7 @@ const handleCreate = async () => {
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   setDialogTile('update')
   // 设置数据
   const res = await DeptApi.getDeptApi(rowId)

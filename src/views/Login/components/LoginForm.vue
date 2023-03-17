@@ -137,7 +137,7 @@ import { useIcon } from '@/hooks/web/useIcon'
 import * as authUtil from '@/utils/auth'
 import { usePermissionStore } from '@/store/modules/permission'
 import * as LoginApi from '@/api/login'
-import { LoginStateEnum, useLoginState, useFormValid } from './useLogin'
+import { LoginStateEnum, useFormValid, useLoginState } from './useLogin'
 
 const { t } = useI18n()
 const message = useMessage()
@@ -166,7 +166,7 @@ const loginData = reactive({
   captchaEnable: import.meta.env.VITE_APP_CAPTCHA_ENABLE,
   tenantEnable: import.meta.env.VITE_APP_TENANT_ENABLE,
   loginForm: {
-    tenantName: '芋道源码',
+    tenantName: '云佳社区',
     username: 'admin',
     password: 'admin123',
     captchaVerification: '',
@@ -265,7 +265,7 @@ const doSocialLogin = async (type: number) => {
     }
     // 计算 redirectUri
     const redirectUri =
-      location.origin + '/social-login?type=' + type + '&redirect=' + (redirect.value || '/')
+      location.origin + '/social/login?type=' + type + '&redirect=' + (redirect.value || '/')
     // 进行跳转
     const res = await LoginApi.socialAuthRedirectApi(type, encodeURIComponent(redirectUri))
     window.location.href = res

@@ -1,12 +1,13 @@
 import request from '@/config/axios'
 
 export interface RoleVO {
-  id: number
+  id: string
   name: string
   code: string
   sort: number
   status: number
   type: number
+  remark: string
   createTime: Date
 }
 
@@ -18,7 +19,7 @@ export interface RolePageReqVO extends PageParam {
 }
 
 export interface UpdateStatusReqVO {
-  id: number
+  id: string
   status: number
 }
 
@@ -29,11 +30,11 @@ export const getRolePageApi = async (params: RolePageReqVO) => {
 
 // 查询角色（精简)列表
 export const listSimpleRolesApi = async () => {
-  return await request.get({ url: '/system/role/list-all-simple' })
+  return await request.get({ url: '/system/role/simple/list/all' })
 }
 
 // 查询角色详情
-export const getRoleApi = async (id: number) => {
+export const getRoleApi = async (id: string) => {
   return await request.get({ url: '/system/role/get?id=' + id })
 }
 
@@ -49,10 +50,10 @@ export const updateRoleApi = async (data: RoleVO) => {
 
 // 修改角色状态
 export const updateRoleStatusApi = async (data: UpdateStatusReqVO) => {
-  return await request.put({ url: '/system/role/update-status', data })
+  return await request.put({ url: '/system/role/update/status', data })
 }
 
 // 删除角色
-export const deleteRoleApi = async (id: number) => {
+export const deleteRoleApi = async (id: string) => {
   return await request.delete({ url: '/system/role/delete?id=' + id })
 }

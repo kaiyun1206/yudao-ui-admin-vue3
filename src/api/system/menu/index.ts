@@ -1,12 +1,12 @@
 import request from '@/config/axios'
 
 export interface MenuVO {
-  id: number
+  id: string
   name: string
   permission: string
   type: number
   sort: number
-  parentId: number
+  parentId: string
   path: string
   icon: string
   component: string
@@ -15,6 +15,7 @@ export interface MenuVO {
   visible: boolean
   keepAlive: boolean
   alwaysShow?: boolean
+  remark: string
   createTime: Date
 }
 
@@ -25,7 +26,7 @@ export interface MenuPageReqVO {
 
 // 查询菜单（精简）列表
 export const listSimpleMenusApi = () => {
-  return request.get({ url: '/system/menu/list-all-simple' })
+  return request.get({ url: '/system/menu/simple/list/all' })
 }
 
 // 查询菜单列表
@@ -34,7 +35,7 @@ export const getMenuListApi = (params: MenuPageReqVO) => {
 }
 
 // 获取菜单详情
-export const getMenuApi = (id: number) => {
+export const getMenuApi = (id: string) => {
   return request.get({ url: '/system/menu/get?id=' + id })
 }
 
@@ -49,6 +50,6 @@ export const updateMenuApi = (data: MenuVO) => {
 }
 
 // 删除菜单
-export const deleteMenuApi = (id: number) => {
+export const deleteMenuApi = (id: string) => {
   return request.delete({ url: '/system/menu/delete?id=' + id })
 }

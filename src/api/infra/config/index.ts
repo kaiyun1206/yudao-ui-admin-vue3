@@ -1,7 +1,7 @@
 import request from '@/config/axios'
 
 export interface ConfigVO {
-  id: number
+  id: string
   category: string
   name: string
   key: string
@@ -32,13 +32,13 @@ export const getConfigPageApi = (params: ConfigPageReqVO) => {
 }
 
 // 查询参数详情
-export const getConfigApi = (id: number) => {
+export const getConfigApi = (id: string) => {
   return request.get({ url: '/infra/config/get?id=' + id })
 }
 
 // 根据参数键名查询参数值
 export const getConfigKeyApi = (configKey: string) => {
-  return request.get({ url: '/infra/config/get-value-by-key?key=' + configKey })
+  return request.get({ url: '/infra/config/get/value?key=' + configKey })
 }
 
 // 新增参数
@@ -52,7 +52,7 @@ export const updateConfigApi = (data: ConfigVO) => {
 }
 
 // 删除参数
-export const deleteConfigApi = (id: number) => {
+export const deleteConfigApi = (id: string) => {
   return request.delete({ url: '/infra/config/delete?id=' + id })
 }
 

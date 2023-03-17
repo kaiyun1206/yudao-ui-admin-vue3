@@ -1,8 +1,8 @@
 import request from '@/config/axios'
 
 export interface FileVO {
-  id: number
-  configId: number
+  id: string
+  configId: string
   path: string
   name: string
   url: string
@@ -23,6 +23,6 @@ export const getFilePageApi = (params: FilePageReqVO) => {
 }
 
 // 删除文件
-export const deleteFileApi = (id: number) => {
+export const deleteFileApi = (id: string) => {
   return request.delete({ url: '/infra/file/delete?id=' + id })
 }

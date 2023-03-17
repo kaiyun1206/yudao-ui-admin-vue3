@@ -75,7 +75,8 @@ declare global {
     children?: AppCustomRouteRecordRaw[]
     keepAlive?: boolean
     visible?: boolean
-    parentId?: number
+    parentId?: string
     alwaysShow?: boolean
+    external?: boolean
   }
 }

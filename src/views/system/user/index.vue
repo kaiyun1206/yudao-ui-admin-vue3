@@ -147,7 +147,7 @@
             v-for="item in postOptions"
             :key="item.id"
             :label="item.name"
-            :value="(item.id as unknown as number)"
+            :value="(item.id as unknown as string)"
           />
         </el-select>
       </template>
@@ -263,13 +263,13 @@
   </XModal>
 </template>
 <script setup lang="ts" name="User">
-import type { ElTree, UploadRawFile, UploadInstance } from 'element-plus'
-import { handleTree, defaultProps } from '@/utils/tree'
+import type { ElTree, UploadInstance, UploadRawFile } from 'element-plus'
+import { defaultProps, handleTree } from '@/utils/tree'
 import download from '@/utils/download'
 import { CommonStatusEnum } from '@/utils/constants'
 import { getAccessToken, getTenantId } from '@/utils/auth'
 import type { FormExpose } from '@/components/Form'
-import { rules, allSchemas } from './user.data'
+import { allSchemas, rules } from './user.data'
 import * as UserApi from '@/api/system/user'
 import { listSimpleDeptApi } from '@/api/system/dept'
 import { listSimpleRolesApi } from '@/api/system/role'
@@ -365,7 +365,7 @@ const handleCreate = async () => {
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   setDialogTile('update')
   await nextTick()
   unref(formRef)?.delSchema('username')
@@ -377,7 +377,7 @@ const handleUpdate = async (rowId: number) => {
 const detailData = ref()
 
 // 详情操作
-const handleDetail = async (rowId: number) => {
+const handleDetail = async (rowId: string) => {
   // 设置数据
   const res = await UserApi.getUserApi(rowId)
   detailData.value = res
@@ -435,7 +435,7 @@ const handleResetPwd = (row: UserApi.UserVO) => {
 const roleDialogVisible = ref(false)
 const roleOptions = ref()
 const userRole = reactive({
-  id: 0,
+  id: '',
   username: '',
   nickname: '',
   roleIds: []

@@ -204,8 +204,8 @@ import { CACHE_KEY, useCache } from '@/hooks/web/useCache'
 import { FormInstance } from 'element-plus'
 // 业务相关的 import
 import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
-import { SystemMenuTypeEnum, CommonStatusEnum } from '@/utils/constants'
-import { handleTree, defaultProps } from '@/utils/tree'
+import { CommonStatusEnum, SystemMenuTypeEnum } from '@/utils/constants'
+import { defaultProps, handleTree } from '@/utils/tree'
 import * as MenuApi from '@/api/system/menu'
 import { allSchemas, rules } from './menu.data'
 
@@ -236,12 +236,12 @@ const actionLoading = ref(false) // 遮罩层
 // 新增和修改的表单值
 const formRef = ref<FormInstance>()
 const menuForm = ref<MenuApi.MenuVO>({
-  id: 0,
+  id: 'M0',
   name: '',
   permission: '',
   type: SystemMenuTypeEnum.DIR,
   sort: 1,
-  parentId: 0,
+  parentId: 'M0',
   path: '',
   icon: '',
   component: '',
@@ -250,6 +250,7 @@ const menuForm = ref<MenuApi.MenuVO>({
   visible: true,
   keepAlive: true,
   alwaysShow: true,
+  remark: '',
   createTime: new Date()
 })
 
@@ -280,12 +281,12 @@ const handleCreate = () => {
   // 重置表单
   formRef.value?.resetFields()
   menuForm.value = {
-    id: 0,
+    id: 'M0',
     name: '',
     permission: '',
     type: SystemMenuTypeEnum.DIR,
     sort: 1,
-    parentId: 0,
+    parentId: 'M0',
     path: '',
     icon: '',
     component: '',
@@ -294,12 +295,13 @@ const handleCreate = () => {
     visible: true,
     keepAlive: true,
     alwaysShow: true,
+    remark: '',
     createTime: new Date()
   }
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   await setDialogTile('update')
   // 设置数据
   const res = await MenuApi.getMenuApi(rowId)
@@ -319,10 +321,10 @@ const submitForm = async () => {
       menuForm.value.type === SystemMenuTypeEnum.MENU
     ) {
       if (!isExternal(menuForm.value.path)) {
-        if (menuForm.value.parentId === 0 && menuForm.value.path.charAt(0) !== '/') {
+        if (menuForm.value.parentId === 'M0' && menuForm.value.path.charAt(0) !== '/') {
           message.error('路径必须以 / 开头')
           return
-        } else if (menuForm.value.parentId !== 0 && menuForm.value.path.charAt(0) === '/') {
+        } else if (menuForm.value.parentId !== 'M0' && menuForm.value.path.charAt(0) === '/') {
           message.error('路径不能以 / 开头')
           return
         }

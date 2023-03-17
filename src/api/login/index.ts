@@ -23,12 +23,12 @@ export const loginApi = (data: UserLoginVO) => {
 
 // 刷新访问令牌
 export const refreshToken = () => {
-  return request.post({ url: '/system/auth/refresh-token?refreshToken=' + getRefreshToken() })
+  return request.post({ url: '/system/auth/refresh/token?refreshToken=' + getRefreshToken() })
 }
 
 // 使用租户名，获得租户编号
 export const getTenantIdByNameApi = (name: string) => {
-  return request.get({ url: '/system/tenant/get-id-by-name?name=' + name })
+  return request.get({ url: '/system/tenant/get/code/by/name?name=' + name })
 }
 
 // 登出
@@ -38,28 +38,28 @@ export const loginOutApi = () => {
 
 // 获取用户权限信息
 export const getInfoApi = () => {
-  return request.get({ url: '/system/auth/get-permission-info' })
+  return request.get({ url: '/system/auth/permission/info' })
 }
 
 // 路由
 export const getAsyncRoutesApi = () => {
-  return request.get({ url: '/system/auth/list-menus' })
+  return request.get({ url: '/system/auth/menus/list' })
 }
 
 //获取登录验证码
 export const sendSmsCodeApi = (data: SmsCodeVO) => {
-  return request.post({ url: '/system/auth/send-sms-code', data })
+  return request.post({ url: '/system/auth/send/sms/code', data })
 }
 
 // 短信验证码登录
 export const smsLoginApi = (data: SmsLoginVO) => {
-  return request.post({ url: '/system/auth/sms-login', data })
+  return request.post({ url: '/system/auth/sms/login', data })
 }
 
 // 社交授权的跳转
 export const socialAuthRedirectApi = (type: number, redirectUri: string) => {
   return request.get({
-    url: '/system/auth/social-auth-redirect?type=' + type + '&redirectUri=' + redirectUri
+    url: '/system/auth/social/redirect?type=' + type + '&redirectUri=' + redirectUri
   })
 }
 // 获取验证图片  以及token

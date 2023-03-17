@@ -5,20 +5,20 @@ export type UserLoginVO = {
 }
 
 export type TokenType = {
-  id: number // 编号
+  id: string // 编号
   accessToken: string // 访问令牌
   refreshToken: string // 刷新令牌
-  userId: number // 用户编号
+  userId: string // 用户编号
   userType: number //用户类型
   clientId: string //客户端编号
   expiresTime: number //过期时间
 }
 
 export type UserVO = {
-  id: number
+  id: string
   username: string
   nickname: string
-  deptId: number
+  deptId: string
   email: string
   mobile: string
   sex: number
@@ -32,11 +32,11 @@ export type UserInfoVO = {
   roles: []
   user: {
     avatar: string
-    id: number
+    id: string
     nickname: string
   }
 }
 
-export type TentantNameVO = {
+export type TenantNameVO = {
   name: string
 }

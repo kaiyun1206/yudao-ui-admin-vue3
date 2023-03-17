@@ -1,12 +1,14 @@
 import request from '@/config/axios'
 
 export interface DeptVO {
-  id?: number
+  id?: string
   name: string
-  parentId: number
+  parentId: string
   status: number
   sort: number
-  leaderUserId: number
+  deptType: number
+  deptRemark: string
+  leaderUserId: string
   phone: string
   email: string
   createTime: Date
@@ -19,7 +21,7 @@ export interface DeptPageReqVO {
 
 // 查询部门（精简)列表
 export const listSimpleDeptApi = async () => {
-  return await request.get({ url: '/system/dept/list-all-simple' })
+  return await request.get({ url: '/system/dept/simple/list/all' })
 }
 
 // 查询部门列表
@@ -28,7 +30,7 @@ export const getDeptPageApi = async (params: DeptPageReqVO) => {
 }
 
 // 查询部门详情
-export const getDeptApi = async (id: number) => {
+export const getDeptApi = async (id: string) => {
   return await request.get({ url: '/system/dept/get?id=' + id })
 }
 
@@ -43,6 +45,6 @@ export const updateDeptApi = async (params: DeptVO) => {
 }
 
 // 删除部门
-export const deleteDeptApi = async (id: number) => {
+export const deleteDeptApi = async (id: string) => {
   return await request.delete({ url: '/system/dept/delete?id=' + id })
 }

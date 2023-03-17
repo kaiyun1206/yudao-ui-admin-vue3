@@ -1,10 +1,10 @@
 import request from '@/config/axios'
 
 export interface UserVO {
-  id: number
+  id: string
   username: string
   nickname: string
-  deptId: number
+  deptId: string
   postIds: string[]
   email: string
   mobile: string
@@ -13,12 +13,13 @@ export interface UserVO {
   loginIp: string
   status: number
   remark: string
+  userType: number
   loginDate: Date
   createTime: Date
 }
 
 export interface UserPageReqVO extends PageParam {
-  deptId?: number
+  deptId?: string
   username?: string
   mobile?: string
   status?: number
@@ -26,8 +27,9 @@ export interface UserPageReqVO extends PageParam {
 }
 
 export interface UserExportReqVO {
-  code?: string
-  name?: string
+  deptId?: string
+  username?: string
+  mobile?: string
   status?: number
   createTime?: Date[]
 }
@@ -38,7 +40,7 @@ export const getUserPageApi = (params: UserPageReqVO) => {
 }
 
 // 查询用户详情
-export const getUserApi = (id: number) => {
+export const getUserApi = (id: string) => {
   return request.get({ url: '/system/user/get?id=' + id })
 }
 
@@ -53,7 +55,7 @@ export const updateUserApi = (data: UserVO) => {
 }
 
 // 删除用户
-export const deleteUserApi = (id: number) => {
+export const deleteUserApi = (id: string) => {
   return request.delete({ url: '/system/user/delete?id=' + id })
 }
 
@@ -64,28 +66,28 @@ export const exportUserApi = (params: UserExportReqVO) => {
 
 // 下载用户导入模板
 export const importUserTemplateApi = () => {
-  return request.download({ url: '/system/user/get-import-template' })
+  return request.download({ url: '/system/user/get/import/template' })
 }
 
 // 用户密码重置
-export const resetUserPwdApi = (id: number, password: string) => {
+export const resetUserPwdApi = (id: string, password: string) => {
   const data = {
     id,
     password
   }
-  return request.put({ url: '/system/user/update-password', data: data })
+  return request.put({ url: '/system/user/update/password', data: data })
 }
 
 // 用户状态修改
-export const updateUserStatusApi = (id: number, status: number) => {
+export const updateUserStatusApi = (id: string, status: number) => {
   const data = {
     id,
     status
   }
-  return request.put({ url: '/system/user/update-status', data: data })
+  return request.put({ url: '/system/user/update/status', data: data })
 }
 
 // 获取用户精简信息列表
-export const getListSimpleUsersApi = () => {
-  return request.get({ url: '/system/user/list-all-simple' })
+export const getListSimpleUsersApi = (userName?: string, userType?: number) => {
+  return request.get({ url: '/system/user/simple/list/all?name=' + userName + '&type=' + userType })
 }

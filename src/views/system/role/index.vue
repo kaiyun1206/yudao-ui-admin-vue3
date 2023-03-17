@@ -150,10 +150,10 @@
 <script setup lang="ts" name="Role">
 import type { ElTree } from 'element-plus'
 import type { FormExpose } from '@/components/Form'
-import { handleTree, defaultProps } from '@/utils/tree'
+import { defaultProps, handleTree } from '@/utils/tree'
 import { SystemDataScopeEnum } from '@/utils/constants'
 import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
-import { rules, allSchemas } from './role.data'
+import { allSchemas, rules } from './role.data'
 import * as RoleApi from '@/api/system/role'
 import { listSimpleMenusApi } from '@/api/system/menu'
 import { listSimpleDeptApi } from '@/api/system/dept'
@@ -189,7 +189,7 @@ const handleCreate = () => {
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   setDialogTile('update')
   // 设置数据
   const res = await RoleApi.getRoleApi(rowId)
@@ -197,7 +197,7 @@ const handleUpdate = async (rowId: number) => {
 }
 
 // 详情操作
-const handleDetail = async (rowId: number) => {
+const handleDetail = async (rowId: string) => {
   setDialogTile('detail')
   // 设置数据
   const res = await RoleApi.getRoleApi(rowId)
@@ -233,7 +233,7 @@ const submitForm = async () => {
 
 // ========== 数据权限 ==========
 const dataScopeForm = reactive({
-  id: 0,
+  id: '',
   name: '',
   code: '',
   dataScope: 0,
@@ -288,15 +288,15 @@ const submitScope = async () => {
       dataScopeDeptIds:
         dataScopeForm.dataScope !== SystemDataScopeEnum.DEPT_CUSTOM
           ? []
-          : (treeRef.value!.getCheckedKeys(false) as unknown as Array<number>)
+          : (treeRef.value!.getCheckedKeys(false) as unknown as Array<string>)
     })
     await PermissionApi.assignRoleDataScopeApi(data.value)
   } else if ('menu' === actionScopeType.value) {
     const data = ref<PermissionApi.PermissionAssignRoleMenuReqVO>({
       roleId: dataScopeForm.id,
       menuIds: [
-        ...(treeRef.value!.getCheckedKeys(false) as unknown as Array<number>),
-        ...(treeRef.value!.getHalfCheckedKeys() as unknown as Array<number>)
+        ...(treeRef.value!.getCheckedKeys(false) as unknown as Array<string>),
+        ...(treeRef.value!.getHalfCheckedKeys() as unknown as Array<string>)
       ]
     })
     await PermissionApi.assignRoleMenuApi(data.value)

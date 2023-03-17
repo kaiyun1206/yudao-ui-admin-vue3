@@ -1,7 +1,7 @@
 import request from '@/config/axios'
 
 export interface SmsChannelVO {
-  id: number
+  id: string
   code: string
   status: number
   signature: string
@@ -21,30 +21,30 @@ export interface SmsChannelPageReqVO extends PageParam {
 
 // 查询短信渠道列表
 export const getSmsChannelPageApi = (params: SmsChannelPageReqVO) => {
-  return request.get({ url: '/system/sms-channel/page', params })
+  return request.get({ url: '/system/sms/channel/page', params })
 }
 
 // 获得短信渠道精简列表
 export function getSimpleSmsChannels() {
-  return request.get({ url: '/system/sms-channel/list-all-simple' })
+  return request.get({ url: '/system/sms/channel/simple/list/all' })
 }
 
 // 查询短信渠道详情
-export const getSmsChannelApi = (id: number) => {
-  return request.get({ url: '/system/sms-channel/get?id=' + id })
+export const getSmsChannelApi = (id: string) => {
+  return request.get({ url: '/system/sms/channel/get?id=' + id })
 }
 
 // 新增短信渠道
 export const createSmsChannelApi = (data: SmsChannelVO) => {
-  return request.post({ url: '/system/sms-channel/create', data })
+  return request.post({ url: '/system/sms/channel/create', data })
 }
 
 // 修改短信渠道
 export const updateSmsChannelApi = (data: SmsChannelVO) => {
-  return request.put({ url: '/system/sms-channel/update', data })
+  return request.put({ url: '/system/sms/channel/update', data })
 }
 
 // 删除短信渠道
-export const deleteSmsChannelApi = (id: number) => {
-  return request.delete({ url: '/system/sms-channel/delete?id=' + id })
+export const deleteSmsChannelApi = (id: string) => {
+  return request.delete({ url: '/system/sms/channel/delete?id=' + id })
 }

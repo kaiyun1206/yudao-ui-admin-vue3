@@ -1,7 +1,7 @@
 import request from '@/config/axios'
 
 export interface JobVO {
-  id: number
+  id: string
   name: string
   status: number
   handlerName: string
@@ -31,7 +31,7 @@ export const getJobPageApi = (params: JobPageReqVO) => {
 }
 
 // 任务详情
-export const getJobApi = (id: number) => {
+export const getJobApi = (id: string) => {
   return request.get({ url: '/infra/job/get?id=' + id })
 }
 
@@ -46,30 +46,30 @@ export const updateJobApi = (data: JobVO) => {
 }
 
 // 删除定时任务调度
-export const deleteJobApi = (id: number) => {
+export const deleteJobApi = (id: string) => {
   return request.delete({ url: '/infra/job/delete?id=' + id })
 }
 
 // 导出定时任务调度
 export const exportJobApi = (params: JobExportReqVO) => {
-  return request.download({ url: '/infra/job/export-excel', params })
+  return request.download({ url: '/infra/job/export/excel', params })
 }
 
 // 任务状态修改
-export const updateJobStatusApi = (id: number, status: number) => {
+export const updateJobStatusApi = (id: string, status: number) => {
   const params = {
     id,
     status
   }
-  return request.put({ url: '/infra/job/update-status', params })
+  return request.put({ url: '/infra/job/update/status', params })
 }
 
 // 定时任务立即执行一次
-export const runJobApi = (id: number) => {
+export const runJobApi = (id: string) => {
   return request.put({ url: '/infra/job/trigger?id=' + id })
 }
 
 // 获得定时任务的下 n 次执行时间
-export const getJobNextTimesApi = (id: number) => {
-  return request.get({ url: '/infra/job/get_next_times?id=' + id })
+export const getJobNextTimesApi = (id: string) => {
+  return request.get({ url: '/infra/job/next/times?id=' + id })
 }

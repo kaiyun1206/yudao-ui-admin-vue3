@@ -7,7 +7,7 @@ import { getInfoApi, loginOutApi } from '@/api/login'
 const { wsCache } = useCache()
 
 interface UserVO {
-  id: number
+  id: string
   avatar: string
   nickname: string
 }
@@ -24,7 +24,7 @@ export const useUserStore = defineStore('admin-user', {
     roles: [],
     isSetUser: false,
     user: {
-      id: 0,
+      id: 'U0',
       avatar: '',
       nickname: ''
     }
@@ -70,7 +70,7 @@ export const useUserStore = defineStore('admin-user', {
       this.roles = []
       this.isSetUser = false
       this.user = {
-        id: 0,
+        id: 'U0',
         avatar: '',
         nickname: ''
       }

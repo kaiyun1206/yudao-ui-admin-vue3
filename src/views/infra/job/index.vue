@@ -131,7 +131,7 @@
 <script setup lang="ts" name="Job">
 import type { FormExpose } from '@/components/Form'
 import * as JobApi from '@/api/infra/job'
-import { rules, allSchemas } from './job.data'
+import { allSchemas, rules } from './job.data'
 import { InfraJobStatusEnum } from '@/utils/constants'
 
 const { t } = useI18n() // 国际化
@@ -173,7 +173,7 @@ const handleCreate = () => {
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   setDialogTile('update')
   // 设置数据
   const res = await JobApi.getJobApi(rowId)
@@ -181,7 +181,7 @@ const handleUpdate = async (rowId: number) => {
 }
 
 // 详情操作
-const handleDetail = async (rowId: number) => {
+const handleDetail = async (rowId: string) => {
   // 设置数据
   const res = await JobApi.getJobApi(rowId)
   detailData.value = res

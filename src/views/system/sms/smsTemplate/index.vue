@@ -112,7 +112,7 @@
 import type { FormExpose } from '@/components/Form'
 // 业务相关的 import
 import * as SmsTemplateApi from '@/api/system/sms/smsTemplate'
-import { rules, allSchemas } from './sms.template.data'
+import { allSchemas, rules } from './sms.template.data'
 
 const { t } = useI18n() // 国际化
 const message = useMessage() // 消息弹窗
@@ -145,7 +145,7 @@ const handleCreate = () => {
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   setDialogTile('update')
   // 设置数据
   const res = await SmsTemplateApi.getSmsTemplateApi(rowId)
@@ -153,7 +153,7 @@ const handleUpdate = async (rowId: number) => {
 }
 
 // 详情操作
-const handleDetail = async (rowId: number) => {
+const handleDetail = async (rowId: string) => {
   setDialogTile('detail')
   // 设置数据
   const res = await SmsTemplateApi.getSmsTemplateApi(rowId)

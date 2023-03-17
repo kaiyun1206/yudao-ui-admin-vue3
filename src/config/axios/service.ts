@@ -1,8 +1,8 @@
 import axios, {
+  AxiosError,
   AxiosInstance,
   AxiosRequestHeaders,
   AxiosResponse,
-  AxiosError,
   InternalAxiosRequestConfig
 } from 'axios'
 
@@ -31,7 +31,7 @@ let requestList: any[] = []
 // 是否正在刷新中
 let isRefreshToken = false
 // 请求白名单，无须token的接口
-const whiteList: string[] = ['/login', '/refresh-token']
+const whiteList: string[] = ['/login', '/refresh/token']
 
 // 创建axios实例
 const service: AxiosInstance = axios.create({
@@ -57,7 +57,7 @@ service.interceptors.request.use(
     // 设置租户
     if (tenantEnable && tenantEnable === 'true') {
       const tenantId = getTenantId()
-      if (tenantId) (config as Recordable).headers['tenant-id'] = tenantId
+      if (tenantId) (config as Recordable).headers['tenantCode'] = tenantId
     }
     const params = config.params || {}
     const data = config.data || false
@@ -125,7 +125,15 @@ service.interceptors.response.use(
     if (ignoreMsgs.indexOf(msg) !== -1) {
       // 如果是忽略的错误码，直接返回 msg 异常
       return Promise.reject(msg)
-    } else if (code === 401) {
+    } else if (
+      code === 401 ||
+      code === 4032 ||
+      code === 4033 ||
+      code === 4034 ||
+      code === 4035 ||
+      code === 4036 ||
+      code === 4037
+    ) {
       // 如果未认证，并且未进行刷新令牌，说明可能是访问令牌过期了
       if (!isRefreshToken) {
         isRefreshToken = true
@@ -183,7 +191,7 @@ service.interceptors.response.use(
           '<div>5 分钟搭建本地环境</div>'
       })
       return Promise.reject(new Error(msg))
-    } else if (code !== 200) {
+    } else if (code !== 2000) {
       if (msg === '无效的刷新令牌') {
         // hard coding：忽略这个提示，直接登出
         console.log(msg)
@@ -212,8 +220,8 @@ service.interceptors.response.use(
 )
 
 const refreshToken = async () => {
-  axios.defaults.headers.common['tenant-id'] = getTenantId()
-  return await axios.post(base_url + '/system/auth/refresh-token?refreshToken=' + getRefreshToken())
+  axios.defaults.headers.common['tenantCode'] = getTenantId()
+  return await axios.post(base_url + '/system/auth/refresh/token?refreshToken=' + getRefreshToken())
 }
 const handleAuthorized = () => {
   const { t } = useI18n()

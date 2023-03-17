@@ -1,9 +1,11 @@
 export type DictTypeVO = {
-  id: number
+  id: string
   name: string
-  type: string
+  type: string // 英文编码 common_status
   status: number
   remark: string
+  dataType: number // 字典数据值的类型
+  parentId: string
   createTime: Date
 }
 
@@ -22,7 +24,7 @@ export type DictTypeExportReqVO = {
 }
 
 export type DictDataVO = {
-  id: number
+  id: string
   sort: number
   label: string
   value: string
@@ -31,6 +33,7 @@ export type DictDataVO = {
   colorType: string
   cssClass: string
   remark: string
+  parentId: string
   createTime: Date
 }
 export type DictDataPageReqVO = {

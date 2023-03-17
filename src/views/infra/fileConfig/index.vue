@@ -161,8 +161,8 @@
 import type { FormInstance } from 'element-plus'
 // 业务相关的 import
 import * as FileConfigApi from '@/api/infra/fileConfig'
-import { rules, allSchemas } from './fileConfig.data'
-import { getIntDictOptions, DICT_TYPE } from '@/utils/dict'
+import { allSchemas, rules } from './fileConfig.data'
+import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
 
 const { t } = useI18n() // 国际化
 const message = useMessage() // 消息弹窗
@@ -181,7 +181,7 @@ const dialogTitle = ref('edit') // 弹出层标题
 const formRef = ref<FormInstance>() // 表单 Ref
 const detailData = ref() // 详情 Ref
 const form = ref<FileConfigApi.FileConfigVO>({
-  id: 0,
+  id: '',
   name: '',
   storage: 0,
   master: false,
@@ -214,7 +214,7 @@ const handleCreate = (formEl: FormInstance | undefined) => {
   setDialogTile('create')
   formEl?.resetFields()
   form.value = {
-    id: 0,
+    id: '',
     name: '',
     storage: 0,
     master: false,
@@ -238,7 +238,7 @@ const handleCreate = (formEl: FormInstance | undefined) => {
 }
 
 // 修改操作
-const handleUpdate = async (rowId: number) => {
+const handleUpdate = async (rowId: string) => {
   // 设置数据
   const res = await FileConfigApi.getFileConfigApi(rowId)
   form.value = res
@@ -246,7 +246,7 @@ const handleUpdate = async (rowId: number) => {
 }
 
 // 详情操作
-const handleDetail = async (rowId: number) => {
+const handleDetail = async (rowId: string) => {
   setDialogTile('detail')
   // 设置数据
   const res = await FileConfigApi.getFileConfigApi(rowId)
@@ -263,7 +263,7 @@ const handleMaster = (row: FileConfigApi.FileConfigVO) => {
     })
 }
 
-const handleTest = async (rowId: number) => {
+const handleTest = async (rowId: string) => {
   const res = await FileConfigApi.testFileConfigApi(rowId)
   message.alert('测试通过，上传文件成功！访问地址：' + res)
 }
