@@ -9,10 +9,12 @@ const props = defineProps({
   loading: propTypes.bool.def(false),
   title: propTypes.string.def('弹窗'),
   width: propTypes.string.def('40%'),
-  height: propTypes.string.def('60%'),
+  height: propTypes.string,
   minWidth: propTypes.string.def('460'),
   minHeight: propTypes.string.def('320'),
-  showFooter: propTypes.bool.def(true)
+  showFooter: propTypes.bool.def(true),
+  maskClosable: propTypes.bool.def(false),
+  escClosable: propTypes.bool.def(false)
 })
 
 const getBindValue = computed(() => {
