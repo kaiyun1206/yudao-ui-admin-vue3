@@ -20,7 +20,7 @@ export interface DeptPageReqVO {
 }
 
 // 查询部门（精简)列表
-export const listSimpleDeptApi = async () => {
+export const getSimpleDeptList = async (): Promise<DeptVO[]> => {
   return await request.get({ url: '/system/dept/simple/list/all' })
 }
 

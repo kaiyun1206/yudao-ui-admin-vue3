@@ -1,36 +1,44 @@
 import request from '@/config/axios'
-import type { DictTypeExportReqVO, DictTypePageReqVO, DictTypeVO } from './types'
+
+export type DictTypeVO = {
+  id: string | undefined
+  name: string
+  type: string
+  status: number
+  remark: string
+  createTime: Date
+}
 
 // 查询字典（精简)列表
-export const listSimpleDictTypeApi = () => {
+export const getSimpleDictTypeList = () => {
   return request.get({ url: '/system/dict/type/simple/list/all' })
 }
 
 // 查询字典列表
-export const getDictTypePageApi = (params: DictTypePageReqVO) => {
+export const getDictTypePage = (params: PageParam) => {
   return request.get({ url: '/system/dict/type/page', params })
 }
 
 // 查询字典详情
-export const getDictTypeApi = (id: string) => {
+export const getDictType = (id: string) => {
   return request.get({ url: '/system/dict/type/get?id=' + id })
 }
 
 // 新增字典
-export const createDictTypeApi = (data: DictTypeVO) => {
+export const createDictType = (data: DictTypeVO) => {
   return request.post({ url: '/system/dict/type/create', data })
 }
 
 // 修改字典
-export const updateDictTypeApi = (data: DictTypeVO) => {
+export const updateDictType = (data: DictTypeVO) => {
   return request.put({ url: '/system/dict/type/update', data })
 }
 
 // 删除字典
-export const deleteDictTypeApi = (id: string) => {
+export const deleteDictType = (id: string) => {
   return request.delete({ url: '/system/dict/type/delete?id=' + id })
 }
 // 导出字典类型
-export const exportDictTypeApi = (params: DictTypeExportReqVO) => {
+export const exportDictType = (params) => {
   return request.get({ url: '/system/dict/type/export', params })
 }

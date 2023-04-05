@@ -1,18 +1,18 @@
 import request from '@/config/axios'
 
 export interface SmsTemplateVO {
-  id: string
-  type: number
+  id: string | null
+  type: number | null
   status: number
   code: string
   name: string
   content: string
   remark: string
   apiTemplateId: string
-  channelId: string
-  channelCode: string
-  params: string[]
-  createTime: Date
+  channelId: string | null
+  channelCode?: string
+  params?: string[]
+  createTime?: Date
 }
 
 export interface SendSmsReqVO {
@@ -21,60 +21,40 @@ export interface SendSmsReqVO {
   templateParams: Map<String, Object>
 }
 
-export interface SmsTemplatePageReqVO {
-  type?: number
-  status?: number
-  code?: string
-  content?: string
-  apiTemplateId?: string
-  channelId?: string
-  createTime?: Date[]
-}
-
-export interface SmsTemplateExportReqVO {
-  type?: number
-  status?: number
-  code?: string
-  content?: string
-  apiTemplateId?: string
-  channelId?: string
-  createTime?: Date[]
-}
-
 // 查询短信模板列表
-export const getSmsTemplatePageApi = (params: SmsTemplatePageReqVO) => {
+export const getSmsTemplatePage = (params: PageParam) => {
   return request.get({ url: '/system/sms/template/page', params })
 }
 
 // 查询短信模板详情
-export const getSmsTemplateApi = (id: string) => {
+export const getSmsTemplate = (id: string) => {
   return request.get({ url: '/system/sms/template/get?id=' + id })
 }
 
 // 新增短信模板
-export const createSmsTemplateApi = (data: SmsTemplateVO) => {
+export const createSmsTemplate = (data: SmsTemplateVO) => {
   return request.post({ url: '/system/sms/template/create', data })
 }
 
 // 修改短信模板
-export const updateSmsTemplateApi = (data: SmsTemplateVO) => {
+export const updateSmsTemplate = (data: SmsTemplateVO) => {
   return request.put({ url: '/system/sms/template/update', data })
 }
 
 // 删除短信模板
-export const deleteSmsTemplateApi = (id: string) => {
+export const deleteSmsTemplate = (id: string) => {
   return request.delete({ url: '/system/sms/template/delete?id=' + id })
 }
 
-// 发送短信
-export const sendSmsApi = (data: SendSmsReqVO) => {
-  return request.post({ url: '/system/sms/template/send/sms', data })
-}
-
 // 导出短信模板
-export const exportPostApi = (params: SmsTemplateExportReqVO) => {
+export const exportSmsTemplate = (params) => {
   return request.download({
     url: '/system/sms/template/export/excel',
     params
   })
+}
+
+// 发送短信
+export const sendSms = (data: SendSmsReqVO) => {
+  return request.post({ url: '/system/sms/template/send/sms', data })
 }

@@ -1,58 +1,39 @@
 import request from '@/config/axios'
 
 export interface SmsLogVO {
-  id: string
-  channelId: string
+  id: string | null
+  channelId: string | null
   channelCode: string
-  templateId: string
+  templateId: string | null
   templateCode: string
-  templateType: number
+  templateType: number | null
   templateContent: string
-  templateParams: Map<string, object>
+  templateParams: Map<string, object> | null
   apiTemplateId: string
   mobile: string
-  userId: string
-  userType: number
-  sendStatus: number
-  sendTime: Date
-  sendCode: number
+  userId: string | null
+  userType: number | null
+  sendStatus: number | null
+  sendTime: Date | null
+  sendCode: number | null
   sendMsg: string
   apiSendCode: string
   apiSendMsg: string
   apiRequestId: string
   apiSerialNo: string
-  receiveStatus: number
-  receiveTime: Date
+  receiveStatus: number | null
+  receiveTime: Date | null
   apiReceiveCode: string
   apiReceiveMsg: string
-  createTime: Date
-}
-
-export interface SmsLogPageReqVO extends PageParam {
-  channelId?: string
-  templateId?: string
-  mobile?: string
-  sendStatus?: number
-  sendTime?: Date[]
-  receiveStatus?: number
-  receiveTime?: Date[]
-}
-export interface SmsLogExportReqVO {
-  channelId?: string
-  templateId?: string
-  mobile?: string
-  sendStatus?: number
-  sendTime?: Date[]
-  receiveStatus?: number
-  receiveTime?: Date[]
+  createTime: Date | null
 }
 
 // 查询短信日志列表
-export const getSmsLogPageApi = (params: SmsLogPageReqVO) => {
+export const getSmsLogPage = (params: PageParam) => {
   return request.get({ url: '/system/sms/log/page', params })
 }
 
 // 导出短信日志
-export const exportSmsLogApi = (params: SmsLogExportReqVO) => {
-  return request.download({ url: '/system/sms/log/export', params })
+export const exportSmsLog = (params) => {
+  return request.download({ url: '/system/sms/log/export/excel', params })
 }
