@@ -37,6 +37,6 @@ export type UserInfoVO = {
   }
 }
 
-export type TenantNameVO = {
+export type TentantNameVO = {
   name: string
 }

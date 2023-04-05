@@ -1,7 +1,7 @@
 import request from '@/config/axios'
 
 export interface ConfigVO {
-  id: string
+  id: string | undefined
   category: string
   name: string
   key: string
