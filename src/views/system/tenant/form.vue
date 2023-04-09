@@ -76,9 +76,9 @@
   </Dialog>
 </template>
 <script setup lang="ts">
-import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
+import {DICT_TYPE, getIntDictOptions} from '@/utils/dict'
 import * as TenantApi from '@/api/system/tenant'
-import { CommonStatusEnum } from '@/utils/constants'
+import {CommonStatusEnum} from '@/utils/constants'
 import * as TenantPackageApi from '@/api/system/tenantPackage'
 
 const { t } = useI18n() // 国际化
@@ -111,7 +111,7 @@ const formRef = ref() // 表单 Ref
 const packageList = ref([]) // 租户套餐
 
 /** 打开弹窗 */
-const open = async (type: string, id?: number) => {
+const open = async (type: string, id?: string) => {
   modelVisible.value = true
   modelTitle.value = t('action.' + type)
   formType.value = type

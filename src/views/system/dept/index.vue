@@ -51,23 +51,17 @@
 
   <!-- 列表 -->
   <ContentWrap>
-    <el-table
-      v-loading="loading"
-      :data="list"
-      row-key="id"
-      default-expand-all
-      v-if="refreshTable"
-    >
-      <el-table-column prop="name" label="部门名称" width="260" />
+    <el-table v-loading="loading" :data="list" row-key="id" default-expand-all v-if="refreshTable">
+      <el-table-column prop="name" label="部门名称" width="260"/>
       <el-table-column prop="leader" label="负责人" width="120">
         <template #default="scope">
           {{ userList.find((user) => user.id === scope.row.leaderUserId)?.nickname }}
         </template>
       </el-table-column>
-      <el-table-column prop="sort" label="排序" width="200" />
+      <el-table-column prop="sort" label="排序" width="200"/>
       <el-table-column prop="status" label="状态" width="100">
         <template #default="scope">
-          <dict-tag :type="DICT_TYPE.COMMON_STATUS" :value="scope.row.status" />
+          <dict-tag :type="DICT_TYPE.COMMON_STATUS" :value="scope.row.status"/>
         </template>
       </el-table-column>
       <el-table-column
@@ -104,14 +98,15 @@
   <DeptForm ref="formRef" @success="getList" />
 </template>
 <script setup lang="ts" name="Dept">
-import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
-import { dateFormatter } from '@/utils/formatTime'
-import { handleTree } from '@/utils/tree'
+import {DICT_TYPE, getIntDictOptions} from '@/utils/dict'
+import {dateFormatter} from '@/utils/formatTime'
+import {handleTree} from '@/utils/tree'
 import * as DeptApi from '@/api/system/dept'
 import DeptForm from './DeptForm.vue'
 import * as UserApi from '@/api/system/user'
+
 const message = useMessage() // 消息弹窗
-const { t } = useI18n() // 国际化
+const {t} = useI18n() // 国际化
 
 const loading = ref(true) // 列表的加载中
 const list = ref() // 列表的数据

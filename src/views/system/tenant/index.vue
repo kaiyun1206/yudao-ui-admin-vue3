@@ -96,7 +96,7 @@
       <el-table-column label="租户名" align="center" prop="name" />
       <el-table-column label="租户套餐" align="center" prop="packageId">
         <template #default="scope">
-          <el-tag v-if="scope.row.packageId === 0" type="danger">系统租户</el-tag>
+          <el-tag v-if="scope.row.packageId === 'TP0'" type="danger">系统租户</el-tag>
           <template v-else v-for="item in packageList">
             <el-tag type="success" :key="item.id" v-if="item.id === scope.row.packageId"
               >{{ item.name }}
@@ -165,15 +165,15 @@
   <TenantForm ref="formRef" @success="getList" />
 </template>
 <script setup lang="ts" name="Tenant">
-import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
-import { dateFormatter } from '@/utils/formatTime'
+import {DICT_TYPE, getIntDictOptions} from '@/utils/dict'
+import {dateFormatter} from '@/utils/formatTime'
 import download from '@/utils/download'
 import * as TenantApi from '@/api/system/tenant'
 import * as TenantPackageApi from '@/api/system/tenantPackage'
 import TenantForm from './form.vue'
 
 const message = useMessage() // 消息弹窗
-const { t } = useI18n() // 国际化
+const {t} = useI18n() // 国际化
 
 const loading = ref(true) // 列表的加载中
 const total = ref(0) // 列表的总页数

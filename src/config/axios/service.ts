@@ -127,6 +127,7 @@ service.interceptors.response.use(
       return Promise.reject(msg)
     } else if (
       code === 401 ||
+      code === 4010 ||
       code === 4032 ||
       code === 4033 ||
       code === 4034 ||
